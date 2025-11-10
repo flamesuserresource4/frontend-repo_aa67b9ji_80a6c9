@@ -18,11 +18,15 @@
   }
 
   body {
-    @apply antialiased;
+    @apply antialiased bg-black text-white;
+    background-image: radial-gradient(1000px 600px at 50% -10%, rgba(16,185,129,0.15), transparent 60%),
+      radial-gradient(800px 500px at 10% 10%, rgba(99,102,241,0.12), transparent 60%),
+      radial-gradient(800px 500px at 90% 20%, rgba(236,72,153,0.10), transparent 60%);
+    background-attachment: fixed;
   }
 }
 
-/* Custom utility classes for shadcn/ui patterns */
+/* Custom utilities */
 @layer utilities {
   .animate-in {
     animation-name: animateIn;
@@ -43,4 +47,79 @@
     --tw-exit-translate-x: initial;
     --tw-exit-translate-y: initial;
   }
+
+  .gradient-text {
+    background: linear-gradient(90deg, #34d399, #60a5fa, #a78bfa, #f472b6);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 10s ease infinite;
+  }
+
+  .neon-ring {
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 0 30px rgba(52,211,153,0.25), inset 0 0 30px rgba(52,211,153,0.08);
+  }
+
+  .glass {
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    backdrop-filter: blur(10px);
+  }
+
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: -100% -150% -100% -150%;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+    animation: shimmer 3.5s ease-in-out infinite;
+  }
+
+  .grid-lines {
+    background-image: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 40px 40px, 40px 40px;
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+  }
+
+  .starfield {
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.7), rgba(255,255,255,0)),
+      radial-gradient(1.5px 1.5px at 120px 80px, rgba(255,255,255,0.5), rgba(255,255,255,0)),
+      radial-gradient(1.5px 1.5px at 200px 120px, rgba(255,255,255,0.6), rgba(255,255,255,0));
+    background-size: 300px 300px;
+    animation: starDrift 60s linear infinite;
+    opacity: 0.35;
+  }
+
+  .orb {
+    filter: blur(40px);
+    opacity: 0.6;
+    animation: float 12s ease-in-out infinite;
+  }
+}
+
+/* Keyframes */
+@keyframes gradientShift {
+  0%,100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-20%); }
+  100% { transform: translateX(20%); }
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0px) translateX(0px); }
+  25% { transform: translateY(-8px) translateX(4px); }
+  50% { transform: translateY(4px) translateX(-6px); }
+  75% { transform: translateY(-6px) translateX(2px); }
+}
+
+@keyframes starDrift {
+  0% { background-position: 0 0, 0 0, 0 0; }
+  100% { background-position: 300px 300px, -300px 300px, 300px -300px; }
 }
